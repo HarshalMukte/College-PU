@@ -1,0 +1,70 @@
+Full stack - 2 (1) practical :-
+--------------------------------
+
+1) Server code :-
+
+import java.io.*;
+import java.net.*;
+
+public class SimpleServer {
+    public static void main(String[] args) {
+        try (ServerSocket serverSocket = new ServerSocket(1234)) {
+            System.out.println("Server is listening on port 1234");
+            while (true) {
+                try (Socket socket = serverSocket.accept()) {
+                    System.out.println("New client connected");
+
+                    OutputStream output = socket.getOutputStream();
+                    PrintWriter writer = new PrintWriter(output, true);
+                    writer.println("Hello, client!");
+
+                    InputStream input = socket.getInputStream();
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(input));
+                    String message = reader.readLine();
+                    System.out.println("Received from client: " + message);
+                }
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+}
+
+2) Client code :-
+
+import java.io.*;
+import java.net.*;
+
+public class SimpleClient {
+    public static void main(String[] args) {
+        String hostname = "localhost";
+        int port = 1234;
+
+        try (Socket socket = new Socket(hostname, port)) {
+            InputStream input = socket.getInputStream();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(input));
+
+            String serverMessage = reader.readLine();
+            System.out.println("Server: " + serverMessage);
+
+            OutputStream output = socket.getOutputStream();
+            PrintWriter writer = new PrintWriter(output, true);
+            writer.println("Hello, server!");
+
+        } catch (UnknownHostException ex) {
+            System.out.println("Server not found: " + ex.getMessage());
+        } catch (IOException ex) {
+            System.out.println("I/O error: " + ex.getMessage());
+        }
+    }
+}
+
+* How to Run this program :-
+
+1) javac SimpleServer.java
+   javac SimpleClient.java
+
+2) java SimpleServer
+
+3) java SimpleClient
+

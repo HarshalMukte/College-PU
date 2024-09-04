@@ -1,0 +1,68 @@
+import javafx.application.Application;
+import javafx.scene.Group;
+import javafx.scene.PerspectiveCamera;
+import javafx.scene.PointLight;
+import javafx.scene.Scene;
+import javafx.scene.shape.Box;
+import javafx.scene.shape.Sphere;
+import javafx.scene.transform.Rotate;
+import javafx.stage.Stage;
+
+public class Main extends Application {
+
+    @Override
+    public void start(Stage primaryStage) {
+        // Create a group to hold the 3D objects
+        Group root = new Group();
+
+        // Create a 3D box
+        Box box = new Box(100, 100, 100);
+        box.setTranslateX(200);
+        box.setTranslateY(200);
+        box.setTranslateZ(200);
+
+        // Create a 3D sphere
+        Sphere sphere = new Sphere(50);
+        sphere.setTranslateX(400);
+        sphere.setTranslateY(200);
+        sphere.setTranslateZ(200);
+
+        // Add the 3D objects to the group
+        root.getChildren().addAll(box, sphere);
+
+        // Create a camera and add it to the scene
+        PerspectiveCamera camera = new PerspectiveCamera(true);
+        camera.setTranslateX(0);
+        camera.setTranslateY(0);
+        camera.setTranslateZ(-1000);
+
+        // Create a light source and add it to the scene
+        PointLight light = new PointLight();
+        light.setTranslateX(200);
+        light.setTranslateY(200);
+        light.setTranslateZ(200);
+
+        // Add the camera and light to the group
+        root.getChildren().addAll(camera, light);
+
+        // Create a scene and add the group to it
+        Scene scene = new Scene(root, 800, 600, true);
+        scene.setCamera(camera);
+
+        // Add some rotation to the 3D objects
+        box.getTransforms().addAll(new Rotate(45, Rotate.X_AXIS), new Rotate(45, Rotate.Y_AXIS));
+        sphere.getTransforms().addAll(new Rotate(45, Rotate.X_AXIS), new Rotate(45, Rotate.Y_AXIS));
+
+        // Set the scene on the stage and show it
+        primaryStage.setTitle("3D Objects");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
+
+
+This code creates a window with a rotating 3D box and sphere. You can modify the code to create more complex 3D objects and scenes.

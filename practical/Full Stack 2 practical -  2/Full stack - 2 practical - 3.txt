@@ -1,0 +1,41 @@
+import javafx.application.Application;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
+
+public class Main extends Application {
+
+    @Override
+    public void start(Stage primaryStage) {
+        // Create a group to hold the 2D objects
+        Group root = new Group();
+
+        // Create a circle
+        Circle circle = new Circle(100, 100, 50);
+        circle.setFill(javafx.scene.paint.Color.RED);
+
+        // Create a rectangle
+        Rectangle rectangle = new Rectangle(200, 200, 100, 50);
+        rectangle.setFill(javafx.scene.paint.Color.BLUE);
+
+        // Add the shapes to the group
+        root.getChildren().addAll(circle, rectangle);
+
+        // Create a scene and add the group to it
+        Scene scene = new Scene(root, 400, 400);
+
+        // Set the scene on the stage and show it
+        primaryStage.setTitle("2D Objects");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
+
+
+This code creates a window with a red circle and a blue rectangle. You can modify the code to create more complex 2D objects and scenes.
